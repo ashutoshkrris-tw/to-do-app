@@ -3,7 +3,9 @@ pipeline {
 
     stages {
         stage('Clone Repository') {
-            git credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/ashutoshkrris-tw/to-do-app'
+            steps {
+                git credentialsId: 'GITHUB_CREDENTIALS', url: 'https://github.com/ashutoshkrris-tw/to-do-app'
+            }
         }
 
         stage('Docker Build Image') {
@@ -15,7 +17,9 @@ pipeline {
         }
 
         withCredentials([string(credentialsId: 'DOCKERHUB_PASSWORD', variable: 'PASSWORD')]) {
-            sh 'docker login -u ashutoshkrris -p $PASSWORD'
+            steps {
+                sh 'docker login -u ashutoshkrris -p $PASSWORD'
+            }
         }
 
         stage('Push Image to DockerHub') {
