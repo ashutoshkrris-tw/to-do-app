@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Clone repository') {
-            steps {
-                sh 'git clone https://github.com/ashutoshkrris-tw/to-do-app.git .'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'docker build -t ashutoshkrris/kanban-board:latest .'
